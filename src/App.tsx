@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme, CssBaseline, Container } from '@mui/materia
 import Home from './pages/Home';      // ← ここでHomeコンポーネントをimport
 import Hello from './pages/Hello';
 import Counter from './pages/Counter';
+import Header from './components/Header';
 
 const theme = createTheme();
 
@@ -13,6 +14,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Header />
         <Container maxWidth="md" sx={{ mt: 4 }}>
           <Routes>
             <Route path="/" element={<Home />} />           {/* ← "/" でHomeを表示 */}
