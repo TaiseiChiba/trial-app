@@ -1,13 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, createTheme, CssBaseline, Container } from '@mui/material';
 
-function App() {
+import Home from './pages/Home';      // ← ここでHomeコンポーネントをimport
+import Hello from './pages/Hello';
+import Counter from './pages/Counter';
+import Header from './components/Header';
+
+const theme = createTheme();
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>hello world</h1>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Header />
+        <Container maxWidth="md" sx={{ mt: 4 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />           {/* ← "/" でHomeを表示 */}
+            <Route path="/hello" element={<Hello />} />
+            <Route path="/counter" element={<Counter />} />
+          </Routes>
+        </Container>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
