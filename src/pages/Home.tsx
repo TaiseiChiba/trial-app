@@ -1,17 +1,11 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import LinkButton from '../components/button/LinkButton';
 
 const menuItems = [
   { title: 'Hello World', path: '/hello' },
   { title: 'カウンター', path: '/counter' }
 ]
-
-const LinkButton = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <Button variant="contained" component={RouterLink} to={to}>
-    {children}
-  </Button>
-);
 
 const Home = () => {
   return (
