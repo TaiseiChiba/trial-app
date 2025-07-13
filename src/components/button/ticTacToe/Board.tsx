@@ -11,6 +11,11 @@ export default function Board() {
   const winner = calculateWinner(cells); // 勝者を計算
   const currentPlayer = isXNext ? "X" : "O";
 
+  /**
+   * セルを押した時の関数
+   * @param index セル番号
+   * @returns 
+   */
   const handleClick = (index: number) => {
     if (cells[index]) return;
 
@@ -21,13 +26,15 @@ export default function Board() {
     setIsXNext(!isXNext);
   }
 
+  /**
+   * 盤面をリセットします。
+   */
   const handleReset = () => {
     setCells(Array(9).fill(null));
     setIsXNext(true);
   };
 
   return (
-
     <>
       <Typography variant="h6" textAlign="center" mb={2}>
         {winner
@@ -60,7 +67,7 @@ export default function Board() {
 /**
  * 勝敗を判定します。
  * @param cells 盤面
- * @returns 
+ * @returns 勝者
  */
 function calculateWinner(cells: Player[]): Player {
   const lines = [
