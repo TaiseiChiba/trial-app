@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Board from '../components/button/ticTacToe/Board'
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { Mode } from '../types/Mode'
+import BoardHuman from '../components/button/ticTacToe/BoardHuman';
+import BoardCpu from '../components/button/ticTacToe/BoardCpu';
 
 export default function TicTacToe() {
 
@@ -42,7 +43,11 @@ export default function TicTacToe() {
           </Paper>
         </Box>
       ) : (
-        <Board mode={mode} />
+        <>
+          {mode?.id === humanMode.id && <BoardHuman mode={mode} />}
+          {mode?.id === cpuMode.id && <BoardCpu mode={mode} />}
+        </>
+        // <Board mode={mode} />
       )}
     </>
   )

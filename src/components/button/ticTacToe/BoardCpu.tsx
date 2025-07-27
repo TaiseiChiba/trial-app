@@ -9,7 +9,7 @@ type Props = {
   mode: Mode | null
 }
 
-export default function Board(props: Props) {
+export default function BoardCpu(props: Props) {
   const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
