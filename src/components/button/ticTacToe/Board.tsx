@@ -1,10 +1,16 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import CellButton from './CellButton'
+import { Mode } from '../../../types/Mode'
+import { useRouteLoaderData } from 'react-router-dom';
 
 type Player = 'X' | 'O' | null;
 
-export default function Board() {
+type Props = {
+  mode: Mode | null
+}
+
+export default function Board(props: Props) {
   const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
@@ -34,8 +40,20 @@ export default function Board() {
     setIsXNext(true);
   };
 
+  /**
+   * モード選択画面へ戻ります
+   */
+  const handleBackSelectMode = () => {
+    window.location.reload();
+  }
+
   return (
     <>
+      <Box>
+        <Typography variant='h4' textAlign="center" mb={2}>
+          {props.mode?.name}
+        </Typography>
+      </Box>
       <Typography variant="h6" textAlign="center" mb={2}>
         {winner
           ? `勝者: ${winner}`
@@ -56,9 +74,13 @@ export default function Board() {
       </Container>
 
       <Box textAlign="center" mt={3}>
-        <Button variant="contained" color="secondary" onClick={handleReset}>
+        <Button variant="contained" color="info" onClick={handleBackSelectMode} sx={{ margin: 2 }}>
+          モード選択へ戻る
+        </Button>
+        <Button variant="contained" color="secondary" onClick={handleReset} sx={{ margin: 2 }}>
           リセット
         </Button>
+
       </Box>
     </>
   )
