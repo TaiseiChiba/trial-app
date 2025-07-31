@@ -4,6 +4,8 @@ import CellButton from './CellButton'
 import { Mode } from '../../../types/Mode'
 import { CpuMode } from '../../../types/CpuMode';
 import { Player } from '../../../types/Player';
+import { cpuMoveEasy, cpuMoveHard, cpuMoveNormal } from '../../../logics/tictactoe/CpuLogics';
+
 
 
 type Props = {
@@ -59,11 +61,26 @@ export default function BoardCpu(props: Props) {
   const handleClick = (index: number) => {
     if (cells[index]) return;
 
+    // プレイヤーの番
     const newCells = [...cells];
-    newCells[index] = isXNext ? xPlayer : oPlayer;
+    newCells[index] = xPlayer;
+
+    // CPUの番
+    const cpuValue = cpuTurn(newCells);
+    newCells[cpuValue] = oPlayer;
 
     setCells(newCells);
     setIsXNext(!isXNext);
+  }
+
+  const cpuTurn = (newCells: Player[]) => {
+    if (cpuMode?.id === easyMode.id) {
+      return cpuMoveEasy(newCells, oPlayer);
+    } else if (cpuMode?.id == normalMode.id) {
+      return cpuMoveNormal(newCells, oPlayer, xPlayer, oPlayer);
+    } else {
+      return cpuMoveHard(newCells, oPlayer, xPlayer, oPlayer);
+    }
   }
 
   /**
