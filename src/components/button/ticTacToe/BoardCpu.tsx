@@ -115,18 +115,37 @@ export default function BoardCpu(props: Props) {
       </Typography>
 
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        {cpuModes.map(cm => (
-          <Button
-            id={cm.id}
-            variant="contained"
-            color="info"
-            onClick={() => handleCpuMode(cm)}
-            sx={{ margin: 2 }}
-            disabled={cpuMode != null}>
-            {cm.name}
-          </Button>
-        ))}
+        {cpuModes.map(cm => {
+          const isSelected = cpuMode?.id === cm.id;
+
+          return (
+            <Button
+              key={cm.id}
+              id={cm.id}
+              variant="contained"
+              color={isSelected ? 'warning' : 'info'}
+              onClick={() => handleCpuMode(cm)}
+              disabled={!isSelected && cpuMode != null}
+              sx={{
+                margin: 2,
+                ...(isSelected && {
+                  backgroundColor: '#ff9800', // 目立つ色（warning色など）
+                  color: '#fff',
+                }),
+                ...(!isSelected && cpuMode != null && {
+                  opacity: 1,
+                  pointerEvents: 'none',
+                  backgroundColor: '#90caf9', // info の薄めの色など
+                  color: '#fff',
+                }),
+              }}
+            >
+              {cm.name}
+            </Button>
+          );
+        })}
       </Box>
+
 
       {
         cpuMode && (
