@@ -5,7 +5,8 @@ import LinkButton from '../components/button/LinkButton';
 const menuItems = [
   { title: 'Hello World', path: '/hello' },
   { title: 'カウンター', path: '/counter' },
-  { title: '三目並べ', path: '/tic-tac-toe' }
+  { title: '三目並べ', path: '/tic-tac-toe' },
+  { title: '天気予報', path: '/weather' }
 ]
 
 const Home = () => {

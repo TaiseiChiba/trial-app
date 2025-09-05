@@ -7,6 +7,7 @@ import Hello from './pages/Hello';
 import Counter from './pages/Counter';
 import Header from './components/Header';
 import TicTacToe from './pages/TicTacToe';
+import Weather from './pages/Weather';
 
 const theme = createTheme();
 
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/hello" element={<Hello />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/tic-tac-toe" element={<TicTacToe />} />
+            <Route path="/weather" element={<Weather />} />
           </Routes>
         </Container>
       </Router>
