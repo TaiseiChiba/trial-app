@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
-import LinkButton from '../components/button/LinkButton';
+import LinkButton from '../components/Button/LinkButton';
 
 const menuItems = [
   { title: 'Hello World', path: '/hello' },
