@@ -1,13 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline, Container } from '@mui/material';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  Container,
+} from "@mui/material";
 
-import Home from '../pages/Home';
-import Hello from '../features/Hello/Hello';
-import Counter from '../features/Counter/Counter';
-import Header from '../components/Header/Header';
-import TicTacToe from '../features/TicTacToe/TicTacToe';
-import Weather from '../features/Weather/Weather';
+import Home from "../pages/Home";
+import Hello from "../features/Hello/Hello";
+import Counter from "../features/Counter/Counter";
+import Header from "../components/Header/Header";
+import TicTacToe from "../features/TicTacToe/TicTacToe";
+import Weather from "../pages/Weather";
 
 const theme = createTheme();
 

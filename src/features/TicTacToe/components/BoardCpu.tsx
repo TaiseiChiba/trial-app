@@ -1,166 +1,183 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import CellButton from './CellButton';
-import { Mode } from '../../../types/Mode';
-import { CpuMode } from '../../../types/CpuMode';
-import { Player } from '../../../types/Player';
-import { cpuMoveEasy, cpuMoveHard, cpuMoveNormal } from '../../../logics/tictactoe/CpuLogics';
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
+import CellButton from "./CellButton";
+import { Mode } from "../../../types/Mode";
+import { CpuMode } from "../../../types/CpuMode";
+import { Player } from "../../../types/Player";
+import {
+  cpuMoveEasy,
+  cpuMoveHard,
+  cpuMoveNormal,
+} from "../../../logics/tictactoe/CpuLogics";
 
 type Props = {
-	mode: Mode | null;
+  mode: Mode | null;
 };
 
 export default function BoardCpu(props: Props) {
-	const xPlayer: Player = {
-		name: 'X'
-	};
-	const oPlayer: Player = {
-		name: 'O'
-	};
+  const xPlayer: Player = {
+    name: "X",
+  };
+  const oPlayer: Player = {
+    name: "O",
+  };
 
-	const easyMode: CpuMode = {
-		id: "easy",
-		name: "弱い"
-	};
-	const normalMode: CpuMode = {
-		id: "normal",
-		name: "普通"
-	};
-	const hardMode: CpuMode = {
-		id: "hard",
-		name: "強い"
-	};
-	const cpuModes = [easyMode, normalMode, hardMode];
+  const easyMode: CpuMode = {
+    id: "easy",
+    name: "弱い",
+  };
+  const normalMode: CpuMode = {
+    id: "normal",
+    name: "普通",
+  };
+  const hardMode: CpuMode = {
+    id: "hard",
+    name: "強い",
+  };
+  const cpuModes = [easyMode, normalMode, hardMode];
 
-	const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
-	const [isXNext, setIsXNext] = useState(true);
-	const [cpuMode, setCpuMode] = useState<CpuMode>();
+  const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(true);
+  const [cpuMode, setCpuMode] = useState<CpuMode>();
 
-	const winner = calculateWinner(cells); // 勝者を計算
-	const currentPlayer = isXNext ? "X" : "O";
+  const winner = calculateWinner(cells); // 勝者を計算
+  const currentPlayer = isXNext ? "X" : "O";
 
-	const handleCpuMode = (selectedCpuMode: CpuMode) => {
-		setCpuMode(selectedCpuMode);
-	};
+  const handleCpuMode = (selectedCpuMode: CpuMode) => {
+    setCpuMode(selectedCpuMode);
+  };
 
-	/**
-	 * セルを押した時の関数
-	 * @param index セル番号
-	 * @returns
-	 */
-	const handleClick = (index: number) => {
-		if (cells[index]) return;
+  /**
+   * セルを押した時の関数
+   * @param index セル番号
+   * @returns
+   */
+  const handleClick = (index: number) => {
+    if (cells[index]) return;
 
-		// プレイヤーの番
-		const newCells = [...cells];
-		newCells[index] = xPlayer;
+    // プレイヤーの番
+    const newCells = [...cells];
+    newCells[index] = xPlayer;
 
-		// CPUの番
-		const cpuValue = cpuTurn(newCells);
-		newCells[cpuValue] = oPlayer;
+    // CPUの番
+    const cpuValue = cpuTurn(newCells);
+    newCells[cpuValue] = oPlayer;
 
-		setCells(newCells);
-		setIsXNext(!isXNext);
-	};
+    setCells(newCells);
+    setIsXNext(!isXNext);
+  };
 
-	const cpuTurn = (newCells: Player[]) => {
-		if (cpuMode?.id === easyMode.id) {
-			return cpuMoveEasy(newCells, oPlayer);
-		} else if (cpuMode?.id == normalMode.id) {
-			return cpuMoveNormal(newCells, oPlayer, xPlayer, oPlayer);
-		} else {
-			return cpuMoveHard(newCells, oPlayer, xPlayer, oPlayer);
-		}
-	};
+  const cpuTurn = (newCells: Player[]) => {
+    if (cpuMode?.id === easyMode.id) {
+      return cpuMoveEasy(newCells, oPlayer);
+    } else if (cpuMode?.id == normalMode.id) {
+      return cpuMoveNormal(newCells, oPlayer, xPlayer, oPlayer);
+    } else {
+      return cpuMoveHard(newCells, oPlayer, xPlayer, oPlayer);
+    }
+  };
 
-	/**
-	 * 盤面をリセットします。
-	 */
-	const handleReset = () => {
-		setCells(Array(9).fill(null));
-		setIsXNext(true);
-		setCpuMode(undefined);
-	};
+  /**
+   * 盤面をリセットします。
+   */
+  const handleReset = () => {
+    setCells(Array(9).fill(null));
+    setIsXNext(true);
+    setCpuMode(undefined);
+  };
 
-	/**
-	 * モード選択画面へ戻ります
-	 */
-	const handleBackSelectMode = () => {
-		window.location.reload();
-	};
+  /**
+   * モード選択画面へ戻ります
+   */
+  const handleBackSelectMode = () => {
+    window.location.reload();
+  };
 
-	return (
-		<Box>
-			<Box>
-				<Typography variant='h4' textAlign="center" mb={2}>
-					{props.mode?.name}
-				</Typography>
-			</Box>
-			<Typography variant="h6" textAlign="center" mb={2}>
-				{winner
-					? `勝者: ${winner}`
-					: cells.every(Boolean)
-						? "引き分け！"
-						: `次の手番: ${currentPlayer}`}
-			</Typography>
+  return (
+    <Box>
+      <Box>
+        <Typography variant="h4" textAlign="center" mb={2}>
+          {props.mode?.name}
+        </Typography>
+      </Box>
+      <Typography variant="h6" textAlign="center" mb={2}>
+        {winner
+          ? `勝者: ${winner}`
+          : cells.every(Boolean)
+          ? "引き分け！"
+          : `次の手番: ${currentPlayer}`}
+      </Typography>
 
-			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-				{cpuModes.map(cm => {
-					const isSelected = cpuMode?.id === cm.id;
-					return (
-						<Button
-							key={cm.id}
-							id={cm.id}
-							variant="contained"
-							color={isSelected ? 'warning' : 'info'}
-							onClick={() => handleCpuMode(cm)}
-							disabled={!isSelected && cpuMode != null}
-							sx={{
-								margin: 2,
-								...(isSelected && {
-									backgroundColor: '#ff9800',
-									color: '#fff',
-								}),
-								...(!isSelected && cpuMode != null && {
-									opacity: 1,
-									pointerEvents: 'none',
-									backgroundColor: '#90caf9',
-									color: '#fff',
-								}),
-							}}
-						>
-							{cm.name}
-						</Button>
-					);
-				})}
-			</Box>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {cpuModes.map((cm) => {
+          const isSelected = cpuMode?.id === cm.id;
+          return (
+            <Button
+              key={cm.id}
+              id={cm.id}
+              variant="contained"
+              color={isSelected ? "warning" : "info"}
+              onClick={() => handleCpuMode(cm)}
+              disabled={!isSelected && cpuMode != null}
+              sx={{
+                margin: 2,
+                ...(isSelected && {
+                  backgroundColor: "#ff9800",
+                  color: "#fff",
+                }),
+                ...(!isSelected &&
+                  cpuMode != null && {
+                    opacity: 1,
+                    pointerEvents: "none",
+                    backgroundColor: "#90caf9",
+                    color: "#fff",
+                  }),
+              }}
+            >
+              {cm.name}
+            </Button>
+          );
+        })}
+      </Box>
 
-			{
-				cpuMode && (
-					<>
-						<Container maxWidth="sm">
-							<Grid container spacing={1}>
-								{cells.map((value, i) => (
-									<Grid key={i} size={4}>
-										<CellButton value={value?.name} disabled={!!winner} onClick={() => handleClick(i)} />
-									</Grid>
-								))}
-							</Grid>
-						</Container>
+      {cpuMode && (
+        <>
+          <Container maxWidth="sm">
+            <Grid container spacing={1}>
+              {cells.map((value, i) => (
+                <Grid key={i} xs={4}>
+                  <CellButton
+                    value={value?.name}
+                    disabled={!!winner}
+                    onClick={() => handleClick(i)}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
 
-						<Box textAlign="center" mt={3}>
-							<Button variant="contained" color="info" onClick={handleBackSelectMode} sx={{ margin: 2 }}>
-								モード選択へ戻る
-							</Button>
-							<Button variant="contained" color="secondary" onClick={handleReset} sx={{ margin: 2 }}>
-								リセット
-							</Button>
-						</Box>
-					</>
-				)
-			}
-		</Box>
-	);
+          <Box textAlign="center" mt={3}>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleBackSelectMode}
+              sx={{ margin: 2 }}
+            >
+              モード選択へ戻る
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleReset}
+              sx={{ margin: 2 }}
+            >
+              リセット
+            </Button>
+          </Box>
+        </>
+      )}
+    </Box>
+  );
 }
 
 /**
@@ -169,26 +186,26 @@ export default function BoardCpu(props: Props) {
  * @returns 勝者
  */
 function calculateWinner(cells: Player[]): string | null {
-	const lines = [
-		[0, 1, 2], // 横
-		[3, 4, 5],
-		[6, 7, 8],
-		[0, 3, 6], // 縦
-		[1, 4, 7],
-		[2, 5, 8],
-		[0, 4, 8], // 斜め
-		[2, 4, 6],
-	];
+  const lines = [
+    [0, 1, 2], // 横
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6], // 縦
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8], // 斜め
+    [2, 4, 6],
+  ];
 
-	for (let [a, b, c] of lines) {
-		if (
-			cells[a]?.name &&
-			cells[a]?.name === cells[b]?.name &&
-			cells[a]?.name === cells[c]?.name
-		) {
-			return cells[a].name;
-		}
-	}
+  for (let [a, b, c] of lines) {
+    if (
+      cells[a]?.name &&
+      cells[a]?.name === cells[b]?.name &&
+      cells[a]?.name === cells[c]?.name
+    ) {
+      return cells[a].name;
+    }
+  }
 
-	return null;
+  return null;
 }
