@@ -91,58 +91,6 @@ export default function Weather() {
           </Card>
 
           {/** ボディ部分 */}
-          <Card sx={{ mb: 3 }}>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                セットアップ完了!
-              </Typography>
-              <Typography color="text.secondary" paragraph>
-                MUI + React + TypeScript の基本設定が完了しました。
-                テーマの切り替えも正常に動作しています。
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 2,
-                  flexWrap: "wrap",
-                  mt: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    p: 2,
-                    bgcolor: "primary.main",
-                    color: "primary.contrastText",
-                    borderRadius: 1,
-                  }}
-                >
-                  Primary Color
-                </Box>
-                <Box
-                  sx={{
-                    p: 2,
-                    bgcolor: "secondary.main",
-                    color: "secondary.contrastText",
-                    borderRadius: 1,
-                  }}
-                >
-                  Secondary Color
-                </Box>
-                <Box
-                  sx={{
-                    p: 2,
-                    bgcolor: "background.paper",
-                    color: "text.primary",
-                    border: 1,
-                    borderColor: "divider",
-                    borderRadius: 1,
-                  }}
-                >
-                  Background Paper
-                </Box>
-              </Box>
-            </CardContent>
-          </Card>
         </Container>
       </Box>
 
@@ -150,7 +98,7 @@ export default function Weather() {
       <Card sx={{ mb: 3 }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>
-            セットアップ完了!
+            セットアップ完了!(参考部分)
           </Typography>
           <Typography color="text.secondary" paragraph>
             MUI + React + TypeScript の基本設定が完了しました。
@@ -196,23 +144,6 @@ export default function Weather() {
             >
               Background Paper
             </Box>
-          </Box>
-        </CardContent>
-      </Card>
-
-      {/* 次ステップの予告 */}
-      <Card>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            📋 次のステップ (Step 2)
-          </Typography>
-          <Typography color="text.secondary">
-            型定義とAPI設定を行います：
-          </Typography>
-          <Box component="ul" sx={{ mt: 1 }}>
-            <li>TypeScript型定義の作成</li>
-            <li>OpenWeatherMap API設定</li>
-            <li>カスタムフック実装</li>
           </Box>
         </CardContent>
       </Card>
