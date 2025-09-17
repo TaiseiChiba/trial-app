@@ -20,6 +20,13 @@ import styled from "@emotion/styled";
 export default function Weather() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  const [location, setLocation] = useState("東京");
+  const [wheatherState, setWeatherState] = useState("晴天");
+  const [tempreture, setTempreture] = useState(20);
+  const [feelingTemperature, setFeelingTemperature] = useState(15);
+  const [minTemperature, setMinTemperature] = useState(9);
+  const [maxTemperature, setMaxTemperature] = useState(20);
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
