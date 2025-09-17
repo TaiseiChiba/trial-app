@@ -46,21 +46,39 @@ export default function Weather() {
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
-                  gap: 2,
+                  justifyContent: "space-between", // 両端配置
+                  alignItems: "center", // 縦位置を揃える
                   flexWrap: "wrap",
                   mt: 2,
                 }}
               >
-                <Button variant="outlined">🔍 検索</Button>
-                <Button variant="outlined">⭐ お気に入り</Button>
-                <Button variant="outlined">⚙️ 設定</Button>
-              </Box>
-              <Box>
-                <FormControlLabel
-                  control={<Switch defaultChecked />}
-                  label="Label"
-                />
+                {/* 左側（中央寄せしたい場合はさらにBoxで囲む） */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                    justifyContent: "center",
+                    flex: 1,
+                  }}
+                >
+                  <Button variant="outlined">🔍 検索</Button>
+                  <Button variant="outlined">⭐ お気に入り</Button>
+                  <Button variant="outlined">⚙️ 設定</Button>
+                </Box>
+
+                {/* 右側（スイッチ） */}
+                <Box>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isDarkMode}
+                        onChange={(e) => setIsDarkMode(e.target.checked)}
+                      />
+                    }
+                    label="夜間モード"
+                    labelPlacement="start" // ← ラベルを右寄せにする場合
+                  />
+                </Box>
               </Box>
             </CardContent>
           </Card>
