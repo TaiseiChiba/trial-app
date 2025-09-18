@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   Grid,
   ListItem,
+  Stack,
   Switch,
   ThemeProvider,
   Typography,
@@ -91,6 +92,93 @@ export default function Weather() {
           </Card>
 
           {/** ボディ部分 */}
+          <Box>
+            <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  <CardContent>
+                    <Stack spacing={2} alignItems="center">
+                      <Typography
+                        variant="h5"
+                        gutterBottom
+                        color="secondary.contrastText"
+                      >
+                        📍{location}
+                      </Typography>
+                      <Typography variant="h2">☀️</Typography>
+                      <Typography variant="h3">{tempreture} ℃</Typography>
+                      <Typography variant="h5">{wheatherState}</Typography>
+                      <Typography variant="h6">
+                        体感温度 {feelingTemperature} ℃
+                      </Typography>
+                      <Typography variant="h5">
+                        最高 {maxTemperature} ℃ / 最低 {minTemperature} ℃
+                      </Typography>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={4}>
+                <Card sx={{ mb: 3 }}>
+                  <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                      小部分
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 2,
+                        flexWrap: "wrap",
+                        mt: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          p: 2,
+                          bgcolor: "primary.main",
+                          color: "primary.contrastText",
+                          borderRadius: 1,
+                        }}
+                      >
+                        Primary Color
+                      </Box>
+                      <Box
+                        sx={{
+                          p: 2,
+                          bgcolor: "secondary.main",
+                          color: "secondary.contrastText",
+                          borderRadius: 1,
+                        }}
+                      >
+                        Secondary Color
+                      </Box>
+                      <Box
+                        sx={{
+                          p: 2,
+                          bgcolor: "background.paper",
+                          color: "text.primary",
+                          border: 1,
+                          borderColor: "divider",
+                          borderRadius: 1,
+                        }}
+                      >
+                        Background Paper
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </Box>
         </Container>
       </Box>
 
