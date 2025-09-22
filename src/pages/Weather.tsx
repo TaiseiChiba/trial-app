@@ -13,10 +13,12 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchWeather from "../features/Weather/SearchWeather";
 import { darkTheme, lightTheme } from "../features/Weather/theme/theme";
 import styled from "@emotion/styled";
+import { WeatherData } from "../types/weather/WeatherData";
+import apiClient from "../features/Weather/api/api";
 
 export default function Weather() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,9 +30,28 @@ export default function Weather() {
   const [minTemperature, setMinTemperature] = useState(9);
   const [maxTemperature, setMaxTemperature] = useState(20);
 
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  // エラーメッセージを管理するstate：string型またはnull型を使用して型定義
+  const [error, setError] = useState<string | null>(null);
+
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await apiClient.get<WeatherData>(
+          "/forecast/city/130010"
+        );
+        setWeather(response.data);
+      } catch (err) {
+        // エラーが発生した場合、エラーメッセージをstateにセット
+        setError((err as Error).message);
+      }
+    };
+    fetchWeather();
+  });
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -112,16 +133,23 @@ export default function Weather() {
                         gutterBottom
                         color="secondary.contrastText"
                       >
-                        📍{location}
+                        📍{weather?.location.city}
                       </Typography>
-                      <Typography variant="h2">☀️</Typography>
-                      <Typography variant="h3">{tempreture} ℃</Typography>
-                      <Typography variant="h5">{wheatherState}</Typography>
-                      <Typography variant="h6">
-                        体感温度 {feelingTemperature} ℃
-                      </Typography>
+                      <img
+                        src={weather?.forecasts[0].image.url}
+                        style={{ width: "100px", height: "100px" }} // アイコン画像のサイズ
+                      />
                       <Typography variant="h5">
-                        最高 {maxTemperature} ℃ / 最低 {minTemperature} ℃
+                        {weather?.forecasts[0].telop}
+                      </Typography>
+                      <Typography variant="h6">
+                        最高{" "}
+                        {weather?.forecasts[0].temperature.max?.celsius ||
+                          "N/A"}{" "}
+                        ℃ / 最低{" "}
+                        {weather?.forecasts[0].temperature.min?.celsius ||
+                          "N/A"}{" "}
+                        ℃
                       </Typography>
                     </Stack>
                   </CardContent>
@@ -144,7 +172,7 @@ export default function Weather() {
                       <Box
                         sx={{
                           p: 2,
-                          bgcolor: "primary.main",
+                          bgcolor: "text.secondary",
                           color: "primary.contrastText",
                           borderRadius: 1,
                         }}
