@@ -156,113 +156,64 @@ export default function Weather() {
                 </Card>
               </Grid>
               <Grid item xs={4}>
-                <Card sx={{ mb: 3 }}>
-                  <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                      小部分
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: 2,
-                        flexWrap: "wrap",
-                        mt: 2,
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          p: 2,
-                          bgcolor: "text.secondary",
-                          color: "primary.contrastText",
-                          borderRadius: 1,
-                        }}
-                      >
-                        Primary Color
-                      </Box>
-                      <Box
-                        sx={{
-                          p: 2,
-                          bgcolor: "secondary.main",
-                          color: "secondary.contrastText",
-                          borderRadius: 1,
-                        }}
-                      >
-                        Secondary Color
-                      </Box>
-                      <Box
-                        sx={{
-                          p: 2,
-                          bgcolor: "background.paper",
-                          color: "text.primary",
-                          border: 1,
-                          borderColor: "divider",
-                          borderRadius: 1,
-                        }}
-                      >
-                        Background Paper
-                      </Box>
-                    </Box>
-                  </CardContent>
+                <Card
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  <Card
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "40%",
+                      width: "90%",
+                      textAlign: "center",
+                      margin: 2,
+                      backgroundColor: 'grey.50',
+                    }}
+                  >
+                    <CardContent>
+                      <Stack spacing={2} alignItems="center">
+                        <Typography variant="h4">🧭</Typography>
+                        <Typography>風向き</Typography>
+                        <Typography>{weather?.forecasts[0].detail.wind}</Typography>
+                      </Stack>
+                    </CardContent>
+                  </Card>
+                  <Card
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "40%",
+                      width: "90%",
+                      textAlign: "center",
+                      margin: 2,
+                      backgroundColor: 'grey.50',
+                    }}
+                  >
+                    <CardContent>
+                      <Stack spacing={2} alignItems="center">
+                        <Typography variant="h4">🌊</Typography>
+                        <Typography>波の高さ</Typography>
+                        <Typography>{weather?.forecasts[0].detail.wave}</Typography>
+                      </Stack>
+                    </CardContent>
+                  </Card>
                 </Card>
               </Grid>
             </Grid>
           </Box>
         </Container>
       </Box>
-
-      {/* デモ用 */}
-      <Card sx={{ mb: 3 }}>
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            セットアップ完了!(参考部分)
-          </Typography>
-          <Typography color="text.secondary" paragraph>
-            MUI + React + TypeScript の基本設定が完了しました。
-            テーマの切り替えも正常に動作しています。
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              flexWrap: "wrap",
-              mt: 2,
-            }}
-          >
-            <Box
-              sx={{
-                p: 2,
-                bgcolor: "primary.main",
-                color: "primary.contrastText",
-                borderRadius: 1,
-              }}
-            >
-              Primary Color
-            </Box>
-            <Box
-              sx={{
-                p: 2,
-                bgcolor: "secondary.main",
-                color: "secondary.contrastText",
-                borderRadius: 1,
-              }}
-            >
-              Secondary Color
-            </Box>
-            <Box
-              sx={{
-                p: 2,
-                bgcolor: "background.paper",
-                color: "text.primary",
-                border: 1,
-                borderColor: "divider",
-                borderRadius: 1,
-              }}
-            >
-              Background Paper
-            </Box>
-          </Box>
-        </CardContent>
-      </Card>
     </ThemeProvider>
   );
 }
