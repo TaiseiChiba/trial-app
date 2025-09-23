@@ -17,7 +17,7 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Header />
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container maxWidth={false} sx={{ mt: 4 }}>
           <Routes>
             <Route path="/" element={<Home />} />           {/* ← "/" でHomeを表示 */}
             <Route path="/hello" element={<Hello />} />

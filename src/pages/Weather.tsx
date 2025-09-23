@@ -51,13 +51,14 @@ export default function Weather() {
       <Box
         sx={{
           minHeight: "100vh",
+          width: "100%", // 画面幅いっぱいにする
           background: (theme) =>
             theme.palette.mode === "light"
               ? "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)"
               : "linear-gradient(135deg, #2c3e50 0%, #3498db 100%)",
         }}
       >
-        <Container maxWidth="lg" sx={{ py: 3 }}>
+        <Box sx={{ p: 3 }} >
           {/* ヘッダー部分 */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
@@ -299,12 +300,11 @@ export default function Weather() {
                     </Card>
                   </Box>
                 </Stack>
-
               </CardContent>
             </Card>
           </Box>
-        </Container>
+        </Box>
       </Box>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
