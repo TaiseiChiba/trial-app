@@ -14,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import SearchWeather from "../features/Weather/SearchWeather";
 import { darkTheme, lightTheme } from "../features/Weather/theme/theme";
 import styled from "@emotion/styled";
 import { WeatherData } from "../types/weather/WeatherData";
@@ -22,13 +21,6 @@ import apiClient from "../features/Weather/api/api";
 
 export default function Weather() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const [location, setLocation] = useState("東京");
-  const [wheatherState, setWeatherState] = useState("晴天");
-  const [tempreture, setTempreture] = useState(20);
-  const [feelingTemperature, setFeelingTemperature] = useState(15);
-  const [minTemperature, setMinTemperature] = useState(9);
-  const [maxTemperature, setMaxTemperature] = useState(20);
 
   const [weather, setWeather] = useState<WeatherData | null>(null);
   // エラーメッセージを管理するstate：string型またはnull型を使用して型定義
