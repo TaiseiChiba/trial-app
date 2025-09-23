@@ -129,6 +129,12 @@ export default function Weather() {
                   <CardContent>
                     <Stack spacing={2} alignItems="center">
                       <Typography
+                        gutterBottom
+                        color="secondary.contrastText"
+                      >
+                        {`${weather?.forecasts[0].dateLabel}：${weather?.forecasts[0].date}`}
+                      </Typography>
+                      <Typography
                         variant="h5"
                         gutterBottom
                         color="secondary.contrastText"
@@ -211,6 +217,99 @@ export default function Weather() {
                 </Card>
               </Grid>
             </Grid>
+          </Box>
+
+          <Box sx={{ my: 3 }}>
+            <Card>
+              <CardContent>
+                <Stack>
+                  <Typography variant="h5">明日・明後日の天気</Typography>
+                  <Box
+                    display="flex"           // flexコンテナにする
+                    flexDirection="row"      // 子要素を横並びにする（rowはデフォルト）
+                    justifyContent="space-between" // 横方向のスペースを均等に
+                    alignItems="center"      // 縦方向の中央揃え
+                    p={2}                    // パディング
+                  >
+                    <Card
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "80%",
+                        width: "40%",
+                        textAlign: "center",
+                        margin: 2,
+                        backgroundColor: 'grey.50',
+                      }}
+                    >
+                      <CardContent>
+                        <Stack spacing={2} alignItems="center">
+                          <Typography
+                            gutterBottom
+                            color="secondary.contrastText"
+                          >
+                            {`${weather?.forecasts[1].dateLabel}：${weather?.forecasts[1].date}`}
+                          </Typography>
+                          <img
+                            src={weather?.forecasts[1].image.url}
+                            style={{ width: "100px", height: "100px" }} // アイコン画像のサイズ
+                          />
+                          <Typography variant="h6">
+                            最高{" "}
+                            {weather?.forecasts[1].temperature.max?.celsius ||
+                              "N/A"}{" "}
+                            ℃ / 最低{" "}
+                            {weather?.forecasts[1].temperature.min?.celsius ||
+                              "N/A"}{" "}
+                            ℃
+                          </Typography>
+                        </Stack>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "80%",
+                        width: "40%",
+                        textAlign: "center",
+                        margin: 2,
+                        backgroundColor: 'grey.50',
+                      }}
+                    >
+                      <CardContent>
+                        <Stack spacing={2} alignItems="center">
+                          <Typography
+                            gutterBottom
+                            color="secondary.contrastText"
+                          >
+                            {`${weather?.forecasts[2].dateLabel}：${weather?.forecasts[2].date}`}
+                          </Typography>
+                          <img
+                            src={weather?.forecasts[2].image.url}
+                            style={{ width: "100px", height: "100px" }} // アイコン画像のサイズ
+                          />
+                          <Typography variant="h6">
+                            最高{" "}
+                            {weather?.forecasts[2].temperature.max?.celsius ||
+                              "N/A"}{" "}
+                            ℃ / 最低{" "}
+                            {weather?.forecasts[2].temperature.min?.celsius ||
+                              "N/A"}{" "}
+                            ℃
+                          </Typography>
+                        </Stack>
+                      </CardContent>
+                    </Card>
+                  </Box>
+                </Stack>
+
+              </CardContent>
+            </Card>
           </Box>
         </Container>
       </Box>

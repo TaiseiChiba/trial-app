@@ -3,6 +3,8 @@ export type WeatherData = {
     city: string; // 都市名
   };
   forecasts: {
+    date: string; // 日付
+    dateLabel: string; // 予報日（今日・明日・明後日のいずれか）
     telop: string; // 天気状態
     detail: {
       weather: string; // 詳細な天気情報
