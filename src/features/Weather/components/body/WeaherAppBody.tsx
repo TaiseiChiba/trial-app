@@ -1,10 +1,12 @@
-import { Box, Card, CardContent, Grid, Stack, Typography } from '@mui/material'
-import React from 'react'
-import { WeatherData } from '../../../../types/weather/WeatherData'
+import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import React from "react";
+import { WeatherData } from "../../../../types/weather/WeatherData";
+import TodayWeatherCard from "./card/TodayWeatherCard";
+import TodayWeatherDetailCard from "./card/TodayWeatherDetailCard";
 
 type Props = {
   weather: WeatherData | null;
-}
+};
 
 export default function WeaherAppBody(props: Props) {
   return (
@@ -12,105 +14,10 @@ export default function WeaherAppBody(props: Props) {
       <Box>
         <Grid container spacing={2}>
           <Grid item xs={8}>
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-                textAlign: "center",
-              }}
-            >
-              <CardContent>
-                <Stack spacing={2} alignItems="center">
-                  <Typography
-                    gutterBottom
-                    color="secondary.contrastText"
-                  >
-                    {`${props.weather?.forecasts[0].dateLabel}：${props.weather?.forecasts[0].date}`}
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    gutterBottom
-                    color="secondary.contrastText"
-                  >
-                    📍{props.weather?.location.city}
-                  </Typography>
-                  <img
-                    src={props.weather?.forecasts[0].image.url}
-                    style={{ width: "100px", height: "100px" }} // アイコン画像のサイズ
-                  />
-                  <Typography variant="h5">
-                    {props.weather?.forecasts[0].telop}
-                  </Typography>
-                  <Typography variant="h6">
-                    最高{" "}
-                    {props.weather?.forecasts[0].temperature.max?.celsius ||
-                      "N/A"}{" "}
-                    ℃ / 最低{" "}
-                    {props.weather?.forecasts[0].temperature.min?.celsius ||
-                      "N/A"}{" "}
-                    ℃
-                  </Typography>
-                </Stack>
-              </CardContent>
-            </Card>
+            <TodayWeatherCard weather={props.weather} />
           </Grid>
           <Grid item xs={4}>
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-                textAlign: "center",
-              }}
-            >
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "40%",
-                  width: "90%",
-                  textAlign: "center",
-                  margin: 2,
-                  backgroundColor: 'grey.50',
-                }}
-              >
-                <CardContent>
-                  <Stack spacing={2} alignItems="center">
-                    <Typography variant="h4">🧭</Typography>
-                    <Typography>風向き</Typography>
-                    <Typography>{props.weather?.forecasts[0].detail.wind}</Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "40%",
-                  width: "90%",
-                  textAlign: "center",
-                  margin: 2,
-                  backgroundColor: 'grey.50',
-                }}
-              >
-                <CardContent>
-                  <Stack spacing={2} alignItems="center">
-                    <Typography variant="h4">🌊</Typography>
-                    <Typography>波の高さ</Typography>
-                    <Typography>{props.weather?.forecasts[0].detail.wave}</Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
-            </Card>
+            <TodayWeatherDetailCard weather={props.weather} />
           </Grid>
         </Grid>
       </Box>
@@ -121,11 +28,11 @@ export default function WeaherAppBody(props: Props) {
             <Stack>
               <Typography variant="h5">明日・明後日の天気</Typography>
               <Box
-                display="flex"           // flexコンテナにする
-                flexDirection="row"      // 子要素を横並びにする（rowはデフォルト）
+                display="flex" // flexコンテナにする
+                flexDirection="row" // 子要素を横並びにする（rowはデフォルト）
                 justifyContent="space-between" // 横方向のスペースを均等に
-                alignItems="center"      // 縦方向の中央揃え
-                p={2}                    // パディング
+                alignItems="center" // 縦方向の中央揃え
+                p={2} // パディング
               >
                 <Card
                   sx={{
@@ -137,15 +44,12 @@ export default function WeaherAppBody(props: Props) {
                     width: "40%",
                     textAlign: "center",
                     margin: 2,
-                    backgroundColor: 'grey.50',
+                    backgroundColor: "grey.50",
                   }}
                 >
                   <CardContent>
                     <Stack spacing={2} alignItems="center">
-                      <Typography
-                        gutterBottom
-                        color="secondary.contrastText"
-                      >
+                      <Typography gutterBottom color="secondary.contrastText">
                         {`${props.weather?.forecasts[1].dateLabel}：${props.weather?.forecasts[1].date}`}
                       </Typography>
                       <img
@@ -174,15 +78,12 @@ export default function WeaherAppBody(props: Props) {
                     width: "40%",
                     textAlign: "center",
                     margin: 2,
-                    backgroundColor: 'grey.50',
+                    backgroundColor: "grey.50",
                   }}
                 >
                   <CardContent>
                     <Stack spacing={2} alignItems="center">
-                      <Typography
-                        gutterBottom
-                        color="secondary.contrastText"
-                      >
+                      <Typography gutterBottom color="secondary.contrastText">
                         {`${props.weather?.forecasts[2].dateLabel}：${props.weather?.forecasts[2].date}`}
                       </Typography>
                       <img
@@ -207,5 +108,5 @@ export default function WeaherAppBody(props: Props) {
         </Card>
       </Box>
     </>
-  )
+  );
 }
