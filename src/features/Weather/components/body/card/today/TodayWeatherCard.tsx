@@ -1,6 +1,6 @@
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 import React from "react";
-import { WeatherData } from "../../../../../types/weather/WeatherData";
+import { WeatherData } from "../../../../../../types/weather/WeatherData";
 
 type Props = {
   weather: WeatherData | null;

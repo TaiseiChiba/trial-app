@@ -1,5 +1,5 @@
 import React from "react";
-import { WeatherData } from "../../../../../types/weather/WeatherData";
+import { WeatherData } from "../../../../../../types/weather/WeatherData";
 import { Card, CardContent, Stack, Typography } from "@mui/material";
 
 type Props = {
