@@ -1,12 +1,20 @@
-import { Box, Button, Card, CardContent, FormControlLabel, Switch, Typography } from '@mui/material'
-import React from 'react'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from "@mui/material";
+import React from "react";
 
 type Props = {
-  isDarkMode: boolean,
+  isDarkMode: boolean;
   setIsDarkMode: (isDarkMode: boolean) => void;
-}
+};
 
-export default function SearchWeather(props: Props) {
+export default function WeatherAppHeader(props: Props) {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
@@ -52,5 +60,5 @@ export default function SearchWeather(props: Props) {
         </Box>
       </CardContent>
     </Card>
-  )
+  );
 }

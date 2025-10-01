@@ -18,8 +18,9 @@ import { darkTheme, lightTheme } from "../features/Weather/theme/theme";
 import styled from "@emotion/styled";
 import { WeatherData } from "../types/weather/WeatherData";
 import apiClient from "../features/Weather/api/api";
-import SearchWeather from "../features/Weather/components/header/WeatherAppHeader";
 import WeaherAppBody from "../features/Weather/components/body/WeaherAppBody";
+import WeatherAppHeader from "../features/Weather/components/header/WeatherAppHeader";
+import SearchWeather from "../features/Weather/components/search/SearchWeather";
 
 export default function Weather() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,6 +28,21 @@ export default function Weather() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   // エラーメッセージを管理するstate：string型またはnull型を使用して型定義
   const [error, setError] = useState<string | null>(null);
+
+  // 地区別マスタ
+  const [locationMaster, setLocationMaster] = useState(null);
+
+  /**
+   * 地区別マスタを取得します。
+   */
+  const loadLocationMaster = async () => {
+    try {
+      const response = await fetch("data/LocationMaster.json");
+      const data = await response.json();
+      setLocationMaster(data);
+      console.log(data);
+    } catch (err) {}
+  };
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -41,7 +57,8 @@ export default function Weather() {
       }
     };
     fetchWeather();
-  });
+    loadLocationMaster();
+  }, []);
 
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
@@ -56,14 +73,18 @@ export default function Weather() {
               : "linear-gradient(135deg, #2c3e50 0%, #3498db 100%)",
         }}
       >
-        <Box sx={{ p: 3 }} >
+        <Box sx={{ p: 3 }}>
           {/* ヘッダー部分 */}
-          <SearchWeather isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+          <WeatherAppHeader
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+          />
 
+          <SearchWeather />
           {/** ボディ部分 */}
           <WeaherAppBody weather={weather} />
         </Box>
       </Box>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }
