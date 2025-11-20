@@ -1,46 +1,40 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import React, { useActionState, useState } from 'react'
-import CellButton from './CellButton'
-import { Mode } from '../../../types/Mode'
-import { CpuMode } from '../../../types/CpuMode';
-import { Player } from '../../../types/Player';
-import { cpuMoveEasy, cpuMoveHard, cpuMoveNormal } from '../../../logics/tictactoe/CpuLogics';
-
-
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
+import CellButton from "./CellButton";
+import { Mode } from "../../../types/Mode";
+import { CpuMode } from "../../../types/CpuMode";
+import { Player } from "../../../types/Player";
+import {
+  cpuMoveEasy,
+  cpuMoveHard,
+  cpuMoveNormal,
+} from "../../../logics/tictactoe/CpuLogics";
 
 type Props = {
-  mode: Mode | null
-}
+  mode: Mode | null;
+};
 
 export default function BoardCpu(props: Props) {
-
   const xPlayer: Player = {
-    name: 'X'
-  }
-
+    name: "X",
+  };
   const oPlayer: Player = {
-    name: 'O'
-  }
-
-  const players = [xPlayer, oPlayer, null];
+    name: "O",
+  };
 
   const easyMode: CpuMode = {
     id: "easy",
-    name: "弱い"
+    name: "弱い",
   };
-
   const normalMode: CpuMode = {
     id: "normal",
-    name: "普通"
+    name: "普通",
   };
-
   const hardMode: CpuMode = {
     id: "hard",
-    name: "強い"
+    name: "強い",
   };
-
   const cpuModes = [easyMode, normalMode, hardMode];
-
 
   const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
@@ -51,12 +45,12 @@ export default function BoardCpu(props: Props) {
 
   const handleCpuMode = (selectedCpuMode: CpuMode) => {
     setCpuMode(selectedCpuMode);
-  }
+  };
 
   /**
    * セルを押した時の関数
    * @param index セル番号
-   * @returns 
+   * @returns
    */
   const handleClick = (index: number) => {
     if (cells[index]) return;
@@ -71,7 +65,7 @@ export default function BoardCpu(props: Props) {
 
     setCells(newCells);
     setIsXNext(!isXNext);
-  }
+  };
 
   const cpuTurn = (newCells: Player[]) => {
     if (cpuMode?.id === easyMode.id) {
@@ -81,7 +75,7 @@ export default function BoardCpu(props: Props) {
     } else {
       return cpuMoveHard(newCells, oPlayer, xPlayer, oPlayer);
     }
-  }
+  };
 
   /**
    * 盤面をリセットします。
@@ -97,12 +91,12 @@ export default function BoardCpu(props: Props) {
    */
   const handleBackSelectMode = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <Box>
       <Box>
-        <Typography variant='h4' textAlign="center" mb={2}>
+        <Typography variant="h4" textAlign="center" mb={2}>
           {props.mode?.name}
         </Typography>
       </Box>
@@ -110,34 +104,34 @@ export default function BoardCpu(props: Props) {
         {winner
           ? `勝者: ${winner}`
           : cells.every(Boolean)
-            ? "引き分け！"
-            : `次の手番: ${currentPlayer}`}
+          ? "引き分け！"
+          : `次の手番: ${currentPlayer}`}
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        {cpuModes.map(cm => {
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        {cpuModes.map((cm) => {
           const isSelected = cpuMode?.id === cm.id;
-
           return (
             <Button
               key={cm.id}
               id={cm.id}
               variant="contained"
-              color={isSelected ? 'warning' : 'info'}
+              color={isSelected ? "warning" : "info"}
               onClick={() => handleCpuMode(cm)}
               disabled={!isSelected && cpuMode != null}
               sx={{
                 margin: 2,
                 ...(isSelected && {
-                  backgroundColor: '#ff9800', // 目立つ色（warning色など）
-                  color: '#fff',
+                  backgroundColor: "#ff9800",
+                  color: "#fff",
                 }),
-                ...(!isSelected && cpuMode != null && {
-                  opacity: 1,
-                  pointerEvents: 'none',
-                  backgroundColor: '#90caf9', // info の薄めの色など
-                  color: '#fff',
-                }),
+                ...(!isSelected &&
+                  cpuMode != null && {
+                    opacity: 1,
+                    pointerEvents: "none",
+                    backgroundColor: "#90caf9",
+                    color: "#fff",
+                  }),
               }}
             >
               {cm.name}
@@ -146,33 +140,44 @@ export default function BoardCpu(props: Props) {
         })}
       </Box>
 
+      {cpuMode && (
+        <>
+          <Container maxWidth="sm">
+            <Grid container spacing={1}>
+              {cells.map((value, i) => (
+                <Grid key={i} xs={4}>
+                  <CellButton
+                    value={value?.name}
+                    disabled={!!winner}
+                    onClick={() => handleClick(i)}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
 
-      {
-        cpuMode && (
-          <>
-            <Container maxWidth="sm">
-              <Grid container spacing={1}>
-                {cells.map((value, i) => (
-                  <Grid size={4} key={i}>
-                    <CellButton value={value?.name} disabled={!!winner} onClick={() => handleClick(i)} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-
-            <Box textAlign="center" mt={3}>
-              <Button variant="contained" color="info" onClick={handleBackSelectMode} sx={{ margin: 2 }}>
-                モード選択へ戻る
-              </Button>
-              <Button variant="contained" color="secondary" onClick={handleReset} sx={{ margin: 2 }}>
-                リセット
-              </Button>
-            </Box>
-          </>
-        )
-      }
+          <Box textAlign="center" mt={3}>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleBackSelectMode}
+              sx={{ margin: 2 }}
+            >
+              モード選択へ戻る
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleReset}
+              sx={{ margin: 2 }}
+            >
+              リセット
+            </Button>
+          </Box>
+        </>
+      )}
     </Box>
-  )
+  );
 }
 
 /**
@@ -180,7 +185,7 @@ export default function BoardCpu(props: Props) {
  * @param cells 盤面
  * @returns 勝者
  */
-function calculateWinner(cells: Player[]): String | null {
+function calculateWinner(cells: Player[]): string | null {
   const lines = [
     [0, 1, 2], // 横
     [3, 4, 5],

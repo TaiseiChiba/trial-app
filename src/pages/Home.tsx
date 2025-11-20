@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, CardContent, Typography, Grid, Button } from '@mui/material';
-import LinkButton from '../components/button/LinkButton';
+import LinkButton from '../components/Button/LinkButton';
 
 const menuItems = [
   { title: 'Hello World', path: '/hello' },
   { title: 'カウンター', path: '/counter' },
-  { title: '三目並べ', path: '/tic-tac-toe' }
+  { title: '三目並べ', path: '/tic-tac-toe' },
+  { title: '天気予報', path: '/weather' }
 ]
 
 const Home = () => {

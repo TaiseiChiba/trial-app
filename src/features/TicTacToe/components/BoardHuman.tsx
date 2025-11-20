@@ -1,15 +1,15 @@
-import { Box, Button, Container, Grid, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import CellButton from './CellButton'
-import { Mode } from '../../../types/Mode'
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
+import CellButton from "./CellButton";
+import { Mode } from "../../../types/Mode";
 
-type Player = 'X' | 'O' | null;
+type Player = "X" | "O" | null;
 
 type Props = {
-  mode: Mode | null
-}
+  mode: Mode | null;
+};
 
-export default function Board(props: Props) {
+export default function BoardHuman(props: Props) {
   const [cells, setCells] = useState<Player[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
@@ -19,7 +19,7 @@ export default function Board(props: Props) {
   /**
    * セルを押した時の関数
    * @param index セル番号
-   * @returns 
+   * @returns
    */
   const handleClick = (index: number) => {
     if (cells[index]) return;
@@ -29,7 +29,7 @@ export default function Board(props: Props) {
 
     setCells(newCells);
     setIsXNext(!isXNext);
-  }
+  };
 
   /**
    * 盤面をリセットします。
@@ -44,12 +44,12 @@ export default function Board(props: Props) {
    */
   const handleBackSelectMode = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <>
       <Box>
-        <Typography variant='h4' textAlign="center" mb={2}>
+        <Typography variant="h4" textAlign="center" mb={2}>
           {props.mode?.name}
         </Typography>
       </Box>
@@ -57,31 +57,44 @@ export default function Board(props: Props) {
         {winner
           ? `勝者: ${winner}`
           : cells.every(Boolean)
-            ? "引き分け！"
-            : `次の手番: ${currentPlayer}`}
+          ? "引き分け！"
+          : `次の手番: ${currentPlayer}`}
       </Typography>
-
 
       <Container maxWidth="sm">
         <Grid container spacing={1}>
           {cells.map((value, i) => (
-            <Grid size={4} key={i}>
-              <CellButton value={value} disabled={!!winner} onClick={() => handleClick(i)} />
+            <Grid key={i} xs={4}>
+              <CellButton
+                value={value}
+                disabled={!!winner}
+                onClick={() => handleClick(i)}
+              />
             </Grid>
           ))}
         </Grid>
       </Container>
 
       <Box textAlign="center" mt={3}>
-        <Button variant="contained" color="info" onClick={handleBackSelectMode} sx={{ margin: 2 }}>
+        <Button
+          variant="contained"
+          color="info"
+          onClick={handleBackSelectMode}
+          sx={{ margin: 2 }}
+        >
           モード選択へ戻る
         </Button>
-        <Button variant="contained" color="secondary" onClick={handleReset} sx={{ margin: 2 }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleReset}
+          sx={{ margin: 2 }}
+        >
           リセット
         </Button>
       </Box>
     </>
-  )
+  );
 }
 
 /**
@@ -102,11 +115,7 @@ function calculateWinner(cells: Player[]): Player {
   ];
 
   for (let [a, b, c] of lines) {
-    if (
-      cells[a] &&
-      cells[a] === cells[b] &&
-      cells[a] === cells[c]
-    ) {
+    if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
       return cells[a];
     }
   }

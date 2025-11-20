@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { Mode } from '../types/Mode'
-import BoardHuman from '../components/button/ticTacToe/BoardHuman';
-import BoardCpu from '../components/button/ticTacToe/BoardCpu';
+import BoardHuman from '../features/TicTacToe/components/BoardHuman';
+import BoardCpu from '../features/TicTacToe/components/BoardCpu';
 
 export default function TicTacToe() {
 

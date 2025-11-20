@@ -7,6 +7,7 @@ import Hello from './pages/Hello';
 import Counter from './pages/Counter';
 import Header from './components/Header';
 import TicTacToe from './pages/TicTacToe';
+import Weather from './pages/Weather';
 
 const theme = createTheme();
 
@@ -16,12 +17,13 @@ const App = () => {
       <CssBaseline />
       <Router>
         <Header />
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container maxWidth={false} sx={{ mt: 4 }}>
           <Routes>
             <Route path="/" element={<Home />} />           {/* ← "/" でHomeを表示 */}
             <Route path="/hello" element={<Hello />} />
             <Route path="/counter" element={<Counter />} />
             <Route path="/tic-tac-toe" element={<TicTacToe />} />
+            <Route path="/weather" element={<Weather />} />
           </Routes>
         </Container>
       </Router>
